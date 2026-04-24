@@ -66,6 +66,3 @@ To make machine learning easy and fast for beginners and students.
 - Student projects 🎓
 - Quick data analysis 📊
 - Fast model building ⚡
-
----
-m
