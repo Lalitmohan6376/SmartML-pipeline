@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>AI Visualization</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .graphs-section {
+            width: 100%;
+            padding: 20px;
+        }
+
+        .grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .card {
+            width: 100%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        .btns {
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <h2 class="logo">AI Visualization</h2>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/dataclean">Data Cleaning</a></li>
+            <li><a href="/visual">Visualization</a></li>
+            <li><a href="{{ url_for('ml_model') }}">ML Model</a></li>
+        </ul>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>Visualization Tool</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+
+        <div class="btns">
+            <button type="submit">Generate Visualization</button>
+            <a href="/download_visual">
+                <button type="button">Download Visualization</button>
+            </a>
+        </div>
+    </form>
+</section>
+
+<section class="graphs-section">
+
+    {% if graphs %}
+    <div class="grid">
+        {% for graph in graphs %}
+        <div class="card">
+            <img src="{{ graph }}">
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</section>
+
+</body>
+</html>

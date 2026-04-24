@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML Model</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <h2 class="logo">ML Model</h2>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/dataclean">Data Cleaning</a></li>
+            <li><a href="/visual">Visualization</a></li>
+            <li><a href="/model">ML Model</a></li>
+        </ul>
+    </div>
+</header>
+
+<section class="container">
+    <h1>Build Machine Learning Model</h1>
+
+    <form method="POST" action="/model" enctype="multipart/form-data" class="form-box">
+        <input type="file" name="file" required>
+        <input type="text" name="target" placeholder="Enter Target Column" required>
+        <button type="submit">Build Model</button>
+    </form>
+</section>
+
+{% if result %}
+<section class="output">
+    <h2>Model Results</h2>
+
+    <table class="result-table">
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+
+        {% if result.rf %}
+        <tr>
+            <td>Accuracy Score</td>
+            <td>{{ result.rf }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td>R2 Score</td>
+            <td>{{ result.r2 }}</td>
+        </tr>
+        {% endif %}
+    </table>
+
+    {% if result.cm %}
+    <h3>Confusion Matrix</h3>
+    <table class="cm-table">
+        {% for row in result.cm %}
+        <tr>
+            {% for val in row %}
+            <td>{{ val }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <form action="/download_model" method="GET">
+        <button type="submit" class="download-btn">Download Model</button>
+    </form>
+
+</section>
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Data Cleaner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #ffffff;
+        }
+
+        .data-table th {
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .data-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .data-table tr:hover {
+            background-color: #ddd;
+        }
+
+        .section-title {
+            margin-top: 20px;
+            font-weight: bold;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="navbar">
+        <h2 class="logo">AI Data Cleaner</h2>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/dataclean">Data Cleaning</a></li>
+            <li><a href="/visual">Visualization</a></li>
+            <li><a href="{{ url_for('ml_model') }}">ML Model</a></li>
+        </ul>
+    </div>
+</header>
+
+<section class="hero">
+
+    <h1>Data Cleaning Tool</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="form-box">
+
+        <input type="file" name="file">
+
+        <input type="text" name="target" placeholder="Enter target column"
+               value="{{ target if target else '' }}">
+
+        <input type="hidden" name="filename"
+               value="{{ filename if filename else '' }}">
+
+        <div class="btn-group">
+            <button type="submit" formaction="/preview">Preview Data</button>
+            <button type="submit" formaction="/clean">Clean Data</button>
+        </div>
+
+    </form>
+
+    {% if filename %}
+    <p>Selected File: {{ filename }}</p>
+    {% endif %}
+
+</section>
+
+
+<section class="output-section">
+
+    {% if rows %}
+    <div class="stats">
+        <div>Total Rows: {{ rows }}</div>
+        <div>Total Columns: {{ cols }}</div>
+        <div>Duplicates: {{ duplicates }}</div>
+    </div>
+    {% endif %}
+
+    {% if preview %}
+    <div class="table-container">
+        {{ preview|safe }}
+    </div>
+    {% endif %}
+
+    {% if outlier_removed %}
+    <div class="extra-info">
+        Outliers Removed: {{ outlier_removed }}
+    </div>
+    {% endif %}
+
+   
+    {% if missing is defined and outliers is defined and suggestion is defined and data_types is defined and unique_values is defined %}
+
+    <h3 class="section-title">Data Summary</h3>
+
+    <table class="data-table">
+        <tr>
+            <th>Column</th>
+            <th>Missing Values</th>
+            <th>Outliers</th>
+            <th>Suggestion</th>
+            <th>Data Type</th>
+            <th>Unique Values</th>
+        </tr>
+
+        {% for col in missing.keys() %}
+        <tr>
+            <td>{{ col }}</td>
+            <td>{{ missing[col] }}</td>
+            <td>{{ outliers[col] if col in outliers else '-' }}</td>
+            <td>{{ suggestion[col] if col in suggestion else '-' }}</td>
+            <td>{{ data_types[col] if col in data_types else '-' }}</td>
+            <td>{{ unique_values[col] if col in unique_values else '-' }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    {% endif %}
+
+    <div class="download-btns">
+        <a href="/download"><button>Download Clean Data</button></a>
+        <a href="/download_report"><button>Download Report</button></a>
+    </div>
+
+</section>
+
+</body>
+</html>

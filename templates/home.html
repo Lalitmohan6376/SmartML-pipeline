@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DataTool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <h2 class="logo">DataTool</h2>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/dataclean">Data Cleaning</a></li>
+            <li><a href="/visual">Visualization</a></li>
+            <li><a href="{{ url_for('ml_model') }}">ML Model</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Smart Data Processing Made Simple</h1>
+    <p>
+        DataTool is a powerful yet simple platform designed to help you clean, analyze, 
+        and prepare your data efficiently. Whether you're a student, beginner, or developer, 
+        this tool allows you to handle messy datasets, detect missing values, remove duplicates, 
+        and fix data types automatically.
+    </p>
+    <p>
+        With built-in visualization and machine learning integration, you can move from raw data 
+        to insights and predictions in just a few clicks — no complex coding required.
+    </p>
+    <button>Start Now</button>
+</section>
+
+<section class="image-section">
+    <img src="{{ url_for('static', filename='img.jpg')}}" alt="Data Image">
+</section>
+
+<section class="about">
+    <h2>About This Project</h2>
+    <p>
+        This project focuses on solving one of the most important problems in data science — 
+        data preprocessing. Most real-world datasets are incomplete, inconsistent, and unstructured.
+    </p>
+    <p>
+        DataTool automates key steps like handling missing values, removing duplicates, detecting outliers, 
+        and standardizing formats. It also provides dataset insights such as column types, unique values, 
+        and distributions.
+    </p>
+    <p>
+        The goal is to save time, reduce manual effort, and help users focus more on analysis 
+        and model building instead of spending hours cleaning data.
+    </p>
+</section>
+
+<footer>
+    <p>2026 DataTool | Built for Learning & Projects</p>
+</footer>
+
+</body>
+</html>
