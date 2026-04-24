@@ -34,9 +34,13 @@ It handles everything for you, so you don’t need to write long code again and 
 🛠️ How It Works
 
 1️⃣ Upload your dataset
+
 2️⃣ Data gets cleaned automatically
+
 3️⃣ Visualizations are generated
+
 4️⃣ Model is trained
+
 5️⃣ Predictions are ready
 
 ---
