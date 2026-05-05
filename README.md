@@ -53,13 +53,12 @@ It handles everything for you, so you don’t need to write long code again and 
 - Matplotlib / Seaborn
 - Scikit-learn
 
----
+
 
 🎯 Goal
 
 To make machine learning easy and fast for beginners and students.
 
----
 
 💡 Example Use Cases
 
